@@ -48,13 +48,17 @@ sudo ./cardshark wlan0
 ### Output Example
 
 ```
-5/256 nodes online:
+7/256 nodes online:
 
-192.168.1.1     [AA:BB:CC:DD:EE:FF]
-192.168.1.100   [11:22:33:44:55:66]
-192.168.1.101   [77:88:99:AA:BB:CC]
-192.168.1.150   [DD:EE:FF:00:11:22]
-192.168.1.200   [33:44:55:66:77:88]
+IP Address      MAC Address         Last Seen
+---------------------------------------------
+192.168.1.1     [AA:BB:CC:DD:EE:01] [3s ago]
+192.168.1.15    [11:22:33:44:55:66] [45s ago]
+192.168.1.23    [DE:AD:BE:EF:CA:FE] [2m ago]
+192.168.1.50    [A1:B2:C3:D4:E5:F6] [1s ago]
+192.168.1.101   [00:11:22:33:44:55] [15s ago]
+192.168.1.147   [FF:EE:DD:CC:BB:AA] [5m ago]
+192.168.1.200   [12:34:56:78:9A:BC] [1h ago]
 ```
 
 Press `Ctrl+C` to stop scanning and exit cleanly.
