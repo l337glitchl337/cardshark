@@ -21,11 +21,14 @@ A fast, lightweight ARP network scanner written in C for Linux. Cardshark discov
 
 ```bash
 # Clone or download the source
-git clone <your-repo-url>
+git clone https://github.com/l337glitchl337/cardshark.git
 cd cardshark
 
 # Compile
 gcc cardshark.c -o cardshark -lpthread
+
+# Or use make
+make cardshark
 
 # Optional: Install to system
 sudo cp cardshark /usr/local/bin/
@@ -45,10 +48,6 @@ sudo ./cardshark wlan0
 ### Output Example
 
 ```
-eth0: 192.168.1.100/24
-base IP: 192.168.1.0
-num of addresses: 256
-
 5/256 nodes online:
 
 192.168.1.1     [AA:BB:CC:DD:EE:FF]
