@@ -63,6 +63,7 @@ typedef struct node
 {
     char *ip_address;   // Dynamically allocated IP string
     char *mac_address;  // Dynamically allocated MAC string
+    time_t last_seen;
     struct node *next;
 } node;
 
@@ -383,6 +384,7 @@ void *listen_for_arp(void *arg)
                     if(strcmp(current->ip_address, sender_ip) == 0)
                     {
                         in_list = true;
+                        current->last_seen = time(NULL);
                         break;
                     }
                 }
@@ -404,7 +406,7 @@ void *listen_for_arp(void *arg)
                 // Allocate strings for IP and MAC
                 new_node->ip_address = strdup(sender_ip);
                 new_node->mac_address = strdup(sender_mac);
-                
+                new_node->last_seen = time(NULL);
                 // Check if strdup succeeded (can fail on low memory)
                 if(!new_node->ip_address || !new_node->mac_address)
                 {
@@ -430,14 +432,25 @@ void *listen_for_arp(void *arg)
             
             pthread_mutex_lock(&mutex);
             printf("%d/%d nodes online:\n\n", count, num_addr);
-
+            printf("%-15s %-17s %-25s\n", "IP Address", "MAC Address", "  Last Seen");
+            printf("---------------------------------------------\n");
+   
             for(node *current = first; current != NULL; current = current->next)
             {
                 if(!keep_running)
                 {
                     break;
                 }
-                printf("%-15s [%s]\n", current->ip_address, current->mac_address);
+                
+                time_t now = time(NULL);
+                int seconds_ago = (int)difftime(now, current->last_seen);
+
+                if(seconds_ago < 60)
+                    printf("%-15s [%-17s] [%ds ago]\n", current->ip_address, current->mac_address, seconds_ago);
+                else if(seconds_ago < 3600)
+                    printf("%-15s [%-17s] [%dm ago]\n", current->ip_address, current->mac_address, seconds_ago / 60);
+                else
+                    printf("%-15s [%-17s] [%dh ago]\n", current->ip_address, current->mac_address, seconds_ago / 3600);
                 fflush(stdout);
             }
             pthread_mutex_unlock(&mutex);
