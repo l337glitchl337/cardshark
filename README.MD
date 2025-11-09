@@ -105,6 +105,8 @@ Check available interfaces:
 ip link show
 # or
 ifconfig
+# or
+ip addr
 ```
 
 ### No hosts discovered
