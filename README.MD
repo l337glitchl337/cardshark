@@ -119,7 +119,7 @@ ip addr
 
 - [ ] JSON/CSV export options
 - [ ] Vendor lookup (MAC OUI database)
-- [ ] Timestamps for first/last seen
+- [✔] Timestamps for first/last seen
 - [ ] Configurable scan intervals
 - [ ] IPv6 neighbor discovery support
 
